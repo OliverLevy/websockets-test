@@ -1,0 +1,23 @@
+{
+  "name": "pend2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd client && npm run start\" \"cd server && npm run dev\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OliverLevy/websockets-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OliverLevy/websockets-test/issues"
+  },
+  "homepage": "https://github.com/OliverLevy/websockets-test#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
