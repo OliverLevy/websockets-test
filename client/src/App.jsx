@@ -52,12 +52,15 @@ function App() {
   const handleInputChange = (id, name, e) => {
     // console.log({ key, name, e });
     const newPosition = items[id].position;
-    newPosition[name] = e.target.value;
-    socket.emit("set-position", id, newPosition);
+    newPosition[name] = Number(e.target.value);
+    socket.emit("set-position-test", id, newPosition);
   };
 
-  const handleTest = () => {
+  const handleStart = () => {
     socket.emit("start");
+  };
+  const handleStop = () => {
+    socket.emit("stop");
   };
 
   return (
@@ -69,7 +72,8 @@ function App() {
         handleInputChange={handleInputChange}
       />
       <div>
-        <button onClick={handleTest}>test</button>
+        <button onClick={handleStart}>start</button>
+        <button onClick={handleStop}>stop</button>
       </div>
       <Controls handleReset={handleReset} />
       <Canvas
