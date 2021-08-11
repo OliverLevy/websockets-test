@@ -6,6 +6,8 @@ import Canvas from "./components/Canvas";
 import Controls from "./components/Controls";
 
 const socket = io("http://localhost:4000");
+const cWidth = 600;
+const cHeight = 600;
 
 function App() {
   const [items, setItems] = useState(null);
@@ -29,11 +31,17 @@ function App() {
   };
 
   const handleCanvasClick = (e) => {
+    const id = selected;
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const newPosition = { x: x, y: y };
-    socket.emit("set-position", selected, newPosition);
+    const newValue = items[id];
+    newValue.x = x;
+    newValue.y = y;
+    // console.log(newValue)
+
+    socket.emit("set-position-input", id, "x", newValue);
+    // socket.emit("set-position-input", id, "y", y);
   };
 
   const handleSelect = (e) => {
@@ -49,11 +57,10 @@ function App() {
     setTargetCircle(newPosition);
   };
 
-  const handleInputChange = (id, name, e) => {
-    // console.log({ key, name, e });
-    const newPosition = items[id].position;
-    newPosition[name] = Number(e.target.value);
-    socket.emit("set-position-test", id, newPosition);
+  const handleInputChange = (id, key, e) => {
+    const newValue = items[id];
+    newValue[key] = Number(e.target.value);
+    socket.emit("set-position-input", id, key, newValue);
   };
 
   const handleStart = () => {
@@ -70,6 +77,8 @@ function App() {
         items={items}
         handleSelect={handleSelect}
         handleInputChange={handleInputChange}
+        cWidth={cWidth}
+        cHeight={cHeight}
       />
       <div>
         <button onClick={handleStart}>start</button>
@@ -77,14 +86,15 @@ function App() {
       </div>
       <Controls handleReset={handleReset} />
       <Canvas
-        height="400"
-        width="400"
+        height={cHeight}
+        width={cWidth}
         style={{ background: "grey" }}
         onClick={handleCanvasClick}
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setTargetCircle(null)}
         items={items}
         targetcircle={targetCircle}
+        selected={selected}
       />
     </div>
   );

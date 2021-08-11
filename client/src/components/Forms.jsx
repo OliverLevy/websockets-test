@@ -1,17 +1,33 @@
 import Form from "./Form";
 
-const Forms = ({ items, handleSelect, handleInputChange }) => {
+const Forms = ({
+  items,
+  handleSelect,
+  handleInputChange,
+  cWidth,
+  cHeight,
+  gravity,
+}) => {
   return (
     <div>
       <h4>circle fine adjust</h4>
       {items &&
         Object.keys(items).map((key, i) => {
           const id = items[key].id;
-          const x = items[key].position.x;
-          const y = items[key].position.y;
+          const x = items[key].x;
+          const y = items[key].y;
+          const gravity = items[key].gravity;
           return (
             <div key={i}>
-              <Form x={x} y={y} id={id} handleInputChange={handleInputChange} />
+              <Form
+                x={x}
+                y={y}
+                id={id}
+                handleInputChange={handleInputChange}
+                cWidth={cWidth}
+                cHeight={cHeight}
+                gravity={gravity}
+              />
             </div>
           );
         })}

@@ -10,12 +10,17 @@ const createPends = (pends) => {
     const pend = new Pend(item);
     let timer = null;
 
+    socket.on("init-pend", () => {
+      pend.init();
+      socket.emit("set-position", pend.id, pend.x, pend.y);
+    });
+
     socket.on("start-pend", () => {
       pend.start();
       if (timer === null) {
         timer = setInterval(() => {
-          socket.emit("set-position", pend.id, pend.position);
-        }, 500);
+          socket.emit("set-position", pend.id, pend.x, pend.y);
+        }, 200);
       }
     });
 
@@ -25,11 +30,15 @@ const createPends = (pends) => {
         clearInterval(timer);
         timer = null;
       }
-      socket.emit("set-position", pend.id, pend.position);
+      socket.emit("set-position", pend.id, pend.x, pend.y);
     });
 
     socket.on("reset-pend", (obj) => {
       pend.reset(obj[pend.id]);
+    });
+
+    socket.on("set-pend", (obj, key) => {
+      pend.setKey(obj[pend.id], key);
     });
 
     http.listen(item.port, () => {

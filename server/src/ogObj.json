@@ -1,27 +1,62 @@
 [
   {
     "id": 1,
-    "position": { "x": 0, "y": 0 },
+    "center": { "x": 200, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
     "port": 4001
   },
   {
     "id": 2,
-    "position": { "x": 0, "y": 0 },
+    "center": { "x": 250, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
     "port": 4002
   },
   {
     "id": 3,
-    "position": { "x": 0, "y": 0 },
+    "center": { "x": 300, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
     "port": 4003
   },
   {
     "id": 4,
-    "position": { "x": 0, "y": 0 },
+    "center": { "x": 350, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
     "port": 4004
   },
   {
     "id": 5,
-    "position": { "x": 0, "y": 0 },
+    "center": { "x": 400, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
     "port": 4005
   }
 ]

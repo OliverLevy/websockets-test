@@ -1,4 +1,4 @@
-const Form = ({ x, y, id, handleInputChange }) => {
+const Form = ({ x, y, id, handleInputChange, cWidth, cHeight, gravity }) => {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <b>Pend {id}: </b>
@@ -6,7 +6,7 @@ const Form = ({ x, y, id, handleInputChange }) => {
       <input
         type="range"
         step="1"
-        max="400"
+        max={cWidth}
         name="x"
         value={x}
         onChange={(e) => handleInputChange(id, "x", e)}
@@ -15,11 +15,21 @@ const Form = ({ x, y, id, handleInputChange }) => {
       <input
         type="range"
         step="1"
-        max="400"
+        max={cHeight}
         name="y"
         value={y}
         onChange={(e) => handleInputChange(id, "y", e)}
       />
+      <input
+        type="range"
+        step=".1"
+        max="3"
+        min=".1"
+        name="gravity"
+        value={gravity}
+        onChange={(e) => handleInputChange(id, "gravity", e)}
+      />
+
     </form>
   );
 };

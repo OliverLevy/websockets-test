@@ -15,11 +15,15 @@ createPends(obj);
 
 io.on("connection", (socket) => {
   // should check if there's already instances of the Pend class.
-  socket.emit("init", obj);
 
+  io.emit("init-pend", obj);
+  
+  // io.emit("new-position", obj);
+  
   socket.on("reset", () => {
     obj = copyObj(ogObj);
     io.emit("reset-pend", obj);
+    io.emit("init-pend", obj);
     io.emit("new-position", obj);
   });
 
@@ -31,18 +35,18 @@ io.on("connection", (socket) => {
     io.emit("stop-pend");
   });
 
-  socket.on("set-position-test", (id, newPos) => {
+  socket.on("set-position-input", (id, key, newValue) => {
     // obj = copyObj(ogObj);
-    obj[id].position = newPos;
-    io.emit("reset-pend", obj);
+    obj[id] = newValue;
+    console.log(obj[id]);
+    io.emit("set-pend", obj, key);
     io.emit("new-position", obj);
   });
 
-  socket.on("set-position", (id, newPos) => {
-    obj[id].position = newPos;
+  socket.on("set-position", (id, x, y) => {
+    obj[id].x = x;
+    obj[id].y = y;
     // io.emit("reset-pend", obj);
-
-    // console.log("setting position");
     io.emit("new-position", obj);
   });
 

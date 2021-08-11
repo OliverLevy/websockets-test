@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 
 const Canvas = (props) => {
-  const { items, targetcircle } = props;
+  const { items, targetcircle, selected } = props;
 
   const canvasRef = useRef(null);
 
-  const draw = (canvas, x, y, id, fill) => {
+  const drawCircle = (canvas, x, y, id, fill) => {
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
     ctx.arc(x, y, 20, 0, 2 * Math.PI);
@@ -18,23 +18,39 @@ const Canvas = (props) => {
     ctx.stroke();
   };
 
+  const drawLine = (canvas, x, y, x2, y2, id, fill) => {
+    const ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.width += 0;
 
     if (items) {
-      Object.keys(items).map((key) => {
-        return draw(
+      Object.keys(items).forEach((key) => {
+        drawLine(
           canvas,
-          items[key].position.x,
-          items[key].position.y,
+          items[key].center.x,
+          items[key].center.y,
+          items[key].x,
+          items[key].y
+        );
+
+        drawCircle(
+          canvas,
+          items[key].x,
+          items[key].y,
           items[key].id
         );
       });
     }
 
     if (targetcircle) {
-      draw(canvas, targetcircle.x, targetcircle.y, "", "#fffaf04d");
+      drawCircle(canvas, targetcircle.x, targetcircle.y, selected, "#fffaf04d");
     }
   }, [items, targetcircle]);
 
