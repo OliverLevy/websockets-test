@@ -13,6 +13,7 @@ function App() {
   const [items, setItems] = useState(null);
   const [selected, setSelected] = useState("1");
   const [targetCircle, setTargetCircle] = useState(null);
+  const [stateMessage, setStateMessage] = useState("");
 
   useEffect(() => {
     socket.on("init", (obj) => {
@@ -22,6 +23,14 @@ function App() {
     socket.on("new-position", (obj) => {
       // console.log(999, obj);
       setItems(obj);
+    });
+
+    socket.on("emergency-stop-pends", (msg) => {
+      setStateMessage(msg);
+    });
+
+    socket.on("set-state-message", (msg) => {
+      setStateMessage(msg);
     });
   }, []);
 
@@ -82,6 +91,9 @@ function App() {
       <div>
         <button onClick={handleStart}>start</button>
         <button onClick={handleStop}>stop</button>
+      </div>
+      <div>
+        <p>{stateMessage}</p>
       </div>
       <Controls handleReset={handleReset} />
       <Canvas

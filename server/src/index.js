@@ -9,9 +9,40 @@ let obj = copyObj(ogObj);
 
 createPends(obj);
 
-// app.get("/", (req, res) => {
-//   res.send("hi");
-// });
+app.get("/stop", (req, res) => {
+  // console.log("pleaseeee stop!")
+  io.emit("emergency-stop-pends", "There was a collision!");
+
+  let i = 5;
+
+  const timer = setInterval(() => {
+    io.emit(
+      "set-state-message",
+      `restarting in ${i} ${i === 1 ? "second" : "seconds"}`
+    );
+
+    if (i === 3) {
+      io.emit("set-state-message", `resetting pendulums...`);
+    }
+
+    if (i === 2) {
+      obj = copyObj(ogObj);
+      io.emit("reset-pend", obj);
+      io.emit("init-pend", obj);
+      io.emit("new-position", obj);
+    }
+
+    if (i <= 0) {
+      clearInterval(timer);
+      io.emit("set-state-message", `starting...`);
+      io.emit("start-pend");
+      io.emit("set-state-message", `running...`);
+    }
+    i--;
+  }, 1000);
+
+  res.send("STOP!");
+});
 
 io.on("connection", (socket) => {
   // should check if there's already instances of the Pend class.
@@ -23,14 +54,17 @@ io.on("connection", (socket) => {
     io.emit("reset-pend", obj);
     io.emit("init-pend", obj);
     io.emit("new-position", obj);
+    io.emit("set-state-message", `pendulums have been reset`);
   });
 
   socket.on("start", () => {
     io.emit("start-pend");
+    io.emit("set-state-message", `running...`);
   });
 
   socket.on("stop", () => {
     io.emit("stop-pend");
+    io.emit("set-state-message", `stopped...`);
   });
 
   socket.on("set-position-input", (id, key, newValue) => {
@@ -40,8 +74,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("set-canvas-position", (id, newValue) => {
-    // console.log(id, newValue);
-
     obj[id] = newValue;
 
     io.emit("set-canvas-position-pend", id, obj);

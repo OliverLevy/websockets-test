@@ -1,6 +1,6 @@
 const objToArray = require("../helpers/objToArray");
-const Pend = require("./Pend");
 const findNeighbours = require("../helpers/findNeighbours");
+const Pend = require("./Pend");
 
 const createPends = (pends) => {
   findNeighbours(objToArray(pends), objToArray(pends)[1]);
@@ -43,6 +43,15 @@ const createPends = (pends) => {
         timer = null;
       }
       socket.emit("set-position", pend.id, pend.x, pend.y);
+    });
+
+    socket.on("emergency-stop-pends", () => {
+      // handles emergency stop
+      pend.stop();
+      if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+      }
     });
 
     socket.on("reset-pend", (obj) => {

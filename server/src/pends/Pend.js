@@ -86,7 +86,13 @@ class Pend {
         .get(`http://localhost:${this.neighbours[side]}/position`)
         .then((suc) => {
           // console.log(suc.data);
-          collisionCheck(this, suc.data)
+
+          if (collisionCheck(this, suc.data)) {
+
+            axios.get("http://localhost:4000/stop")
+            // console.log("STOP!");
+            // this.stop();
+          }
         })
         .catch((err) => console.log(err));
     }
