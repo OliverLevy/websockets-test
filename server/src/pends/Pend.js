@@ -1,4 +1,5 @@
 const objToArray = require("../helpers/objToArray");
+const axios = require("axios");
 
 class Pend {
   constructor({
@@ -25,23 +26,29 @@ class Pend {
     this.gravity = gravity;
   }
 
+  neighbours = {};
   isRunning = false;
   timer = null;
 
-  init() {
-    clearInterval(this.timer);
-    this.timer = null;
-    this.isRunning = false;
+  setNeighbours(neighbours) {
+    this.neighbours = neighbours;
+  }
 
-    
+  init() {
+    this.stop();
+    this.angleV = 0;
+    this.angleA = 0;
     this.x = Math.sin(this.angle) * this.length + this.center.x;
     this.y = Math.cos(this.angle) * this.length + this.center.y;
+  }
 
-    let force = (this.gravity * Math.sin(this.angle)) / this.length;
-
-    this.angleA = -1 * force;
-    this.angleV += this.angleA;
-    this.angle += this.angleV;
+  calcAngles(obj) {
+    this.length = Math.sqrt(
+      Math.pow(obj.x - this.center.x, 2) + Math.pow(obj.y, 2)
+    );
+    this.angle = Math.atan((obj.x - this.center.x) / obj.y);
+    this.angleA = 0;
+    this.angleV = 0;
   }
 
   start() {
@@ -56,7 +63,9 @@ class Pend {
         this.angleA = -1 * force;
         this.angleV += this.angleA;
         this.angle += this.angleV;
-      }, 200);
+        this.checkForCollision("left");
+        this.checkForCollision("right");
+      }, 50);
     }
   }
 
@@ -68,8 +77,16 @@ class Pend {
     }
   }
 
+  checkForCollision(side) {
+    if (this.neighbours[side]) {
+      axios
+        .get(`http://localhost:${this.neighbours[side]}/position`)
+        .then((suc) => console.log(suc.data))
+        .catch((err) => console.log(err));
+    }
+  }
+
   setKey(ogObj, key) {
-    console.log(888, ogObj);
     this.stop();
     this[key] = ogObj[key];
   }
@@ -80,7 +97,7 @@ class Pend {
       this[key] = ogObj[key];
     });
     this.stop();
-    this.init()
+    this.init();
   }
 }
 

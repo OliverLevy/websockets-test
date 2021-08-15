@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     socket.on("init", (obj) => {
-      console.log(obj);
+      // console.log(obj);
       setItems(obj);
     });
     socket.on("new-position", (obj) => {
@@ -26,7 +26,7 @@ function App() {
   }, []);
 
   const handleReset = () => {
-    console.log("resetting");
+    // console.log("resetting");
     socket.emit("reset");
   };
 
@@ -38,10 +38,9 @@ function App() {
     const newValue = items[id];
     newValue.x = x;
     newValue.y = y;
-    // console.log(newValue)
+    // console.log(newValue);
 
-    socket.emit("set-position-input", id, "x", newValue);
-    // socket.emit("set-position-input", id, "y", y);
+    socket.emit("set-canvas-position", id, newValue);
   };
 
   const handleSelect = (e) => {

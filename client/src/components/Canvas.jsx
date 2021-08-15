@@ -5,10 +5,10 @@ const Canvas = (props) => {
 
   const canvasRef = useRef(null);
 
-  const drawCircle = (canvas, x, y, id, fill) => {
+  const drawCircle = (canvas, x, y, d, id, fill) => {
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
-    ctx.arc(x, y, 20, 0, 2 * Math.PI);
+    ctx.arc(x, y, d, 0, 2 * Math.PI);
     ctx.font = "16px Arial";
     ctx.fillText(id, Number(x) - 5, Number(y) + 5);
     if (fill) {
@@ -44,13 +44,21 @@ const Canvas = (props) => {
           canvas,
           items[key].x,
           items[key].y,
+          items[key].diameter,
           items[key].id
         );
       });
     }
 
     if (targetcircle) {
-      drawCircle(canvas, targetcircle.x, targetcircle.y, selected, "#fffaf04d");
+      drawCircle(
+        canvas,
+        targetcircle.x,
+        targetcircle.y,
+        30,
+        selected,
+        "#fffaf04d"
+      );
     }
   }, [items, targetcircle]);
 

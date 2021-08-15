@@ -1,25 +1,50 @@
-const Form = ({ x, y, id, handleInputChange, cWidth, cHeight, gravity }) => {
+const Form = ({
+  x,
+  y,
+  id,
+  handleInputChange,
+  cWidth,
+  cHeight,
+  gravity,
+  diameter,
+  angle,
+  length,
+}) => {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <b>Pend {id}: </b>
-      <label htmlFor="x">x:</label>
+
+      <label htmlFor="diameter">diameter: </label>
       <input
         type="range"
         step="1"
-        max={cWidth}
-        name="x"
-        value={x}
-        onChange={(e) => handleInputChange(id, "x", e)}
+        max="100"
+        min="1"
+        name="diameter"
+        value={diameter}
+        onChange={(e) => handleInputChange(id, "diameter", e)}
       />
-      <label htmlFor="y">y:</label>
+      <label htmlFor="angle">length: </label>
       <input
         type="range"
         step="1"
-        max={cHeight}
-        name="y"
-        value={y}
-        onChange={(e) => handleInputChange(id, "y", e)}
+        max="400"
+        min="1"
+        name="angle"
+        value={length}
+        onChange={(e) => handleInputChange(id, "length", e)}
       />
+      <label htmlFor="angle">angle: </label>
+      <input
+        type="range"
+        step=".1"
+        max="1.6"
+        min="-1.6"
+        name="angle"
+        value={angle}
+        onChange={(e) => handleInputChange(id, "angle", e)}
+      />
+      <label htmlFor="gravity">mass: </label>
       <input
         type="range"
         step=".1"
@@ -29,7 +54,6 @@ const Form = ({ x, y, id, handleInputChange, cWidth, cHeight, gravity }) => {
         value={gravity}
         onChange={(e) => handleInputChange(id, "gravity", e)}
       />
-
     </form>
   );
 };

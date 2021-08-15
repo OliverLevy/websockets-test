@@ -17,6 +17,9 @@ const Forms = ({
           const x = items[key].x;
           const y = items[key].y;
           const gravity = items[key].gravity;
+          const angle = items[key].angle;
+          const length = items[key].length;
+          const diameter = items[key].diameter;
           return (
             <div key={i}>
               <Form
@@ -27,6 +30,9 @@ const Forms = ({
                 cWidth={cWidth}
                 cHeight={cHeight}
                 gravity={gravity}
+                angle={angle}
+                length={length}
+                diameter={diameter}
               />
             </div>
           );

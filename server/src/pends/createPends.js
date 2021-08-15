@@ -1,14 +1,26 @@
 const objToArray = require("../helpers/objToArray");
 const Pend = require("./Pend");
+const findNeighbours = require("../helpers/findNeighbours");
 
 const createPends = (pends) => {
-  objToArray(pends).forEach((item) => {
+  findNeighbours(objToArray(pends), objToArray(pends)[1]);
+
+  const array = objToArray(pends);
+
+  array.forEach((item) => {
     const app = require("express")();
     const http = require("http").Server(app);
     const io = require("socket.io-client");
     const socket = io("http://localhost:4000");
     const pend = new Pend(item);
     let timer = null;
+
+    const neighbours = findNeighbours(array, item);
+    pend.setNeighbours(neighbours);
+
+    app.get("/position", (req, res) => {
+      res.json({ x: pend.x, y: pend.y });
+    });
 
     socket.on("init-pend", () => {
       pend.init();
@@ -20,7 +32,7 @@ const createPends = (pends) => {
       if (timer === null) {
         timer = setInterval(() => {
           socket.emit("set-position", pend.id, pend.x, pend.y);
-        }, 200);
+        }, 50);
       }
     });
 
@@ -39,6 +51,12 @@ const createPends = (pends) => {
 
     socket.on("set-pend", (obj, key) => {
       pend.setKey(obj[pend.id], key);
+    });
+
+    socket.on("set-canvas-position-pend", (id, obj) => {
+      if (item.id == id) {
+        pend.calcAngles(obj[id]);
+      }
     });
 
     http.listen(item.port, () => {
