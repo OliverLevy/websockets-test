@@ -19,7 +19,7 @@ const createPends = (pends) => {
     pend.setNeighbours(neighbours);
 
     app.get("/position", (req, res) => {
-      res.json({ x: pend.x, y: pend.y });
+      res.json({ x: pend.x, y: pend.y, center: pend.center, d: pend.diameter });
     });
 
     socket.on("init-pend", () => {

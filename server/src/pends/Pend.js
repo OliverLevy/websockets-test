@@ -1,5 +1,6 @@
 const objToArray = require("../helpers/objToArray");
 const axios = require("axios");
+const { collisionCheck } = require("../collisionCheck");
 
 class Pend {
   constructor({
@@ -13,6 +14,7 @@ class Pend {
     angleA,
     angleV,
     gravity,
+    diameter,
   }) {
     this.id = id;
     this.port = port;
@@ -24,6 +26,7 @@ class Pend {
     this.angleV = angleV;
     this.angleA = angleA;
     this.gravity = gravity;
+    this.diameter = diameter;
   }
 
   neighbours = {};
@@ -81,7 +84,10 @@ class Pend {
     if (this.neighbours[side]) {
       axios
         .get(`http://localhost:${this.neighbours[side]}/position`)
-        .then((suc) => console.log(suc.data))
+        .then((suc) => {
+          // console.log(suc.data);
+          collisionCheck(this, suc.data)
+        })
         .catch((err) => console.log(err));
     }
   }
