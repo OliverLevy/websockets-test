@@ -1,17 +1,25 @@
-const app = require("express")();
+const express = require("express");
+const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http, { cors: { origin: "*" } });
 const ogObj = require("./ogObj.json");
 const createPends = require("./pends/createPends");
 const copyObj = require("./helpers/copyObj");
+const cors = require("cors");
 
 let obj = copyObj(ogObj);
-
 createPends(obj);
 
+app.use(cors());
+
+app.get("/get-pendulums", (req, res) => {
+  // gets the pendulums object if the component unmounts
+  res.json(obj);
+});
+
 app.get("/stop", (req, res) => {
-  // console.log("pleaseeee stop!")
   io.emit("emergency-stop-pends", "There was a collision!");
+  io.emit("set-state-message", "There was a collision!");
 
   let i = 5;
 
@@ -45,9 +53,11 @@ app.get("/stop", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  console.log("another connection");
   // should check if there's already instances of the Pend class.
 
   io.emit("init-pend", obj);
+  io.emit("set-state-message", `pendulums initialized`);
 
   socket.on("reset", () => {
     obj = copyObj(ogObj);

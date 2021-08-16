@@ -9,7 +9,7 @@ const Forms = ({
   gravity,
 }) => {
   return (
-    <div>
+    <section>
       <h4>circle fine adjust</h4>
       {items &&
         Object.keys(items).map((key, i) => {
@@ -37,6 +37,7 @@ const Forms = ({
             </div>
           );
         })}
+
       <h4>select circle to move</h4>
       {items && (
         <select onChange={handleSelect}>
@@ -45,7 +46,7 @@ const Forms = ({
           })}
         </select>
       )}
-    </div>
+    </section>
   );
 };
 

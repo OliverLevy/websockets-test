@@ -1,15 +1,4 @@
-const Form = ({
-  x,
-  y,
-  id,
-  handleInputChange,
-  cWidth,
-  cHeight,
-  gravity,
-  diameter,
-  angle,
-  length,
-}) => {
+const Form = ({ id, handleInputChange, gravity, diameter, angle, length }) => {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <b>Pend {id}: </b>

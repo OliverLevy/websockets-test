@@ -62,7 +62,11 @@ const Canvas = (props) => {
     }
   }, [items, targetcircle]);
 
-  return <canvas ref={canvasRef} {...props}></canvas>;
+  return (
+    <section>
+      <canvas ref={canvasRef} {...props}></canvas>
+    </section>
+  );
 };
 
 export default Canvas;
