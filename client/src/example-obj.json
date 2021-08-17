@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "center": { "x": 300, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
+    "diameter": 20,
+    "port": 4001
+  },
+  {
+    "id": 2,
+    "center": { "x": 400, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
+    "diameter": 20,
+    "port": 4002
+  },
+  {
+    "id": 3,
+    "center": { "x": 500, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
+    "diameter": 20,
+    "port": 4003
+  },
+  {
+    "id": 4,
+    "center": { "x": 600, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
+    "diameter": 20,
+    "port": 4004
+  },
+  {
+    "id": 5,
+    "center": { "x": 700, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "angle": 1,
+    "angleV": 0,
+    "angleA": 0,
+    "gravity": 1,
+    "length": 200,
+    "diameter": 20,
+    "port": 4005
+  }
+]

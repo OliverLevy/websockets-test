@@ -23,3 +23,29 @@ section {
   max-width: 1000px;
   width: 100%;
 }
+
+.doc {
+  &__endpoint {
+    padding: 1rem 0;
+
+    & h4 {
+      padding-bottom: 0.5rem;
+    }
+
+    & button {
+      outline: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: $accent;
+      padding: 0 .5rem;
+    }
+  }
+  &__code {
+    background: lightgray;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}

@@ -12,7 +12,7 @@ createPends(obj);
 
 app.use(cors());
 
-app.get("/get-pendulums", (req, res) => {
+app.get("/pendulums", (req, res) => {
   // gets the pendulums object if the component unmounts
   res.json(obj);
 });

@@ -17,7 +17,7 @@ const Main = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/get-pendulums")
+      .get("http://localhost:4000/pendulums")
       .then((suc) => {
         setItems(suc.data);
       })
