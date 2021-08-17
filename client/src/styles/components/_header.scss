@@ -1,0 +1,27 @@
+.header {
+  &__title {
+    padding: 1rem 0;
+  }
+
+  &__nav a {
+    display: inline-block;
+    color: $accent;
+    padding-right: 1rem;
+    text-decoration: none;
+    
+    &:visited {
+      color: $accent;
+    }
+    
+    &:hover {
+      color: $hover;
+      text-decoration: underline;
+      transition: all .2s;
+    }
+
+    &:active {
+      color: $focus;
+      transform: translate(1px, 1px);
+    }
+  }
+}

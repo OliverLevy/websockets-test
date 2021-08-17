@@ -69,8 +69,7 @@ const Main = () => {
   return (
     <div>
       <Instructions />
-      <StateMessage />
-      <Controls />
+
       <Forms
         items={items}
         handleSelect={handleSelect}
@@ -78,6 +77,8 @@ const Main = () => {
         cWidth={cWidth}
         cHeight={cHeight}
       />
+      <Controls />
+      <StateMessage />
       <Canvas
         height={cHeight}
         width={cWidth}

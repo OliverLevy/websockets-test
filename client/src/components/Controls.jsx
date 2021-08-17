@@ -1,4 +1,4 @@
-import socket from '../socket-config'
+import socket from "../socket-config";
 
 const Controls = () => {
   const handleStart = () => {
@@ -11,11 +11,17 @@ const Controls = () => {
     socket.emit("reset");
   };
   return (
-    <section>
-      <h3>controls</h3>
-      <button onClick={handleStart}>start</button>
-      <button onClick={handleStop}>stop</button>
-      <button onClick={handleReset}>reset</button>
+    <section className="controls">
+      <h3 className="controls__title">Controls</h3>
+      <button className="controls__btn" onClick={handleStart}>
+        start
+      </button>
+      <button className="controls__btn" onClick={handleStop}>
+        stop
+      </button>
+      <button className="controls__btn" onClick={handleReset}>
+        reset
+      </button>
     </section>
   );
 };
