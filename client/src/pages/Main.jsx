@@ -7,8 +7,8 @@ import StateMessage from "../components/StateMessage";
 import axios from "axios";
 import socket from "../socket-config";
 
-const cWidth = 600;
-const cHeight = 600;
+const cWidth = 1000;
+const cHeight = 1000;
 
 const Main = () => {
   const [items, setItems] = useState(null);

@@ -5,17 +5,19 @@ import Documentation from "./pages/Documentation";
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route path="/documentation">
-          <Documentation />
-        </Route>
-      </Switch>
-    </Router>
+    <main className="main">
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route path="/documentation">
+            <Documentation />
+          </Route>
+        </Switch>
+      </Router>
+    </main>
   );
 }
 

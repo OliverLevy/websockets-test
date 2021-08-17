@@ -64,7 +64,7 @@ const Canvas = (props) => {
 
   return (
     <section>
-      <canvas ref={canvasRef} {...props}></canvas>
+      <canvas className="canvas" ref={canvasRef} {...props}></canvas>
     </section>
   );
 };

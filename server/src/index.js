@@ -53,9 +53,6 @@ app.get("/stop", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("another connection");
-  // should check if there's already instances of the Pend class.
-
   io.emit("init-pend", obj);
   io.emit("set-state-message", `pendulums initialized`);
 
