@@ -48,6 +48,7 @@ io.on("connection", (socket) => {
   // should check if there's already instances of the Pend class.
 
   io.emit("init-pend", obj);
+  io.emit("set-state-message", `pendulums initialized`);
 
   socket.on("reset", () => {
     obj = copyObj(ogObj);
