@@ -2,10 +2,10 @@ const Instructions = () => {
   return (
     <section>
       <h1>Instructions</h1>
-      <p>Here are some instructions on how to use this thing.</p>
       <p>
-        It's not very full right now but I'll add some stuff when I get a
-        chance.
+        Use the pendulum fine adjust section to adjust each pendulum separately. <br />
+        You can also use the pendulum selector to select the pendulum you wish
+        to move with your mouse directly on the canvas. 
       </p>
     </section>
   );
